@@ -25,7 +25,7 @@ def create_chart():
 """
 
 
-@app.route('/plot.png')
+@app.route('/covid19-new-cases-bar-chart.png')
 def plot_png():
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
@@ -33,7 +33,7 @@ def plot_png():
     ca_df_mar = df[(df['state'] == 'California') & (df['date'] > '2020-02-28')]
     by_county_by_date = ca_df_mar.pivot_table(index='date', columns='county', values='cases', fill_value=0)[BAY_AREA]
     by_county_by_date_diff = by_county_by_date.diff().iloc[1:]
-    by_county_by_date_diff.plot(ax=ax, kind="bar", stacked=True, figsize=(15, 6),
+    by_county_by_date_diff.plot(ax=ax, kind="bar", stacked=True, figsize=(13, 10),
                                 title='Daily new cases by county in SF bay area')
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
